@@ -1,6 +1,6 @@
 import React from "react";
-import { StackTabApp } from "./src/ex4/StackTabApp";
+import { DrawerApp } from "./src/ex5/DrawerApp";
 
 export default function App() {
-  return <StackTabApp />;
+  return <DrawerApp />;
 }
