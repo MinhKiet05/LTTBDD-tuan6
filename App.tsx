@@ -1,6 +1,6 @@
 import React from "react";
-import { BottomTabApp } from "./src/ex3/BottomTabApp";
+import { StackTabApp } from "./src/ex4/StackTabApp";
 
 export default function App() {
-  return <BottomTabApp />;
+  return <StackTabApp />;
 }
