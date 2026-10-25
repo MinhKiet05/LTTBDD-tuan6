@@ -1,8 +1,12 @@
 import { Phone } from "../types";
 
-const API_URL = "https://6acb47c1ef37b1504077b1ac.mockapi.io";
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
 
-export async function fetchPhone(id: string): Promise<Phone> {
+export async function fetchPhones(): Promise<Phone[]> {
+  if (!API_URL) {
+    throw new Error("Chưa cấu hình API URL");
+  }
+
   const response = await fetch(`${API_URL}/phones`);
 
   if (!response.ok) {
@@ -11,17 +15,24 @@ export async function fetchPhone(id: string): Promise<Phone> {
 
   const data: Phone[] = await response.json();
 
-  console.log("Dữ liệu từ API:", data);
-
-  // Tạm lấy sản phẩm đầu tiên vì API chưa có ID
-  const phone = data[0];
-
-  if (!phone) {
-    throw new Error("Không tìm thấy sản phẩm");
+  if (!Array.isArray(data)) {
+    throw new Error("Dữ liệu API không phải danh sách sản phẩm");
   }
 
-  return {
-    ...phone,
-    id: phone.id ?? id,
-  };
+  console.log("Danh sách điện thoại từ API:", data);
+
+  return data;
+}
+
+// Dùng cho Bài 2
+export async function fetchPhone(id: string): Promise<Phone> {
+  const phones = await fetchPhones();
+
+  const phone = phones.find((p) => String(p.id) === id);
+
+  if (!phone) {
+    throw new Error(`Không tìm thấy sản phẩm có ID ${id}`);
+  }
+
+  return phone;
 }

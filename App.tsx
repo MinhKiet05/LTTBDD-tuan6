@@ -1,6 +1,6 @@
 import React from "react";
-import { SelectPhoneApi } from "./src/ex1/SelectPhoneApi";
+import { BottomTabApp } from "./src/ex3/BottomTabApp";
 
 export default function App() {
-  return <SelectPhoneApi />;
+  return <BottomTabApp />;
 }
