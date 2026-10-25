@@ -8,7 +8,10 @@ node_modules/
 dist/
 web-build/
 expo-env.d.ts
-
+# Environment variables
+.env
+.env.*
+!.env.example
 # Native
 .kotlin/
 *.orig.*
